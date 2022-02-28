@@ -1,0 +1,2 @@
+class CourseImage < ApplicationRecord
+end

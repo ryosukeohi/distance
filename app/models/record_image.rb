@@ -1,0 +1,2 @@
+class RecordImage < ApplicationRecord
+end
