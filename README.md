@@ -18,7 +18,7 @@
 自分のランニングを記録したり他のランナーのランニングコースを知りたいときなどに活用できます。
 
 ## 設計書
-<...>
+
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1XLWzJiATNIfnLEuKk9kb81BbaqKKDta8951GlhJyDwE/edit?usp=sharing
