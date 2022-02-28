@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_28_025443) do
+ActiveRecord::Schema.define(version: 2022_02_28_072749) do
 
   create_table "course_images", force: :cascade do |t|
     t.integer "course_id", null: false
-    t.integer "image_id", null: false
+    t.string "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_02_28_025443) do
 
   create_table "record_images", force: :cascade do |t|
     t.integer "record_id", null: false
-    t.integer "image_id", null: false
+    t.string "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_02_28_025443) do
     t.text "introduction", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "profile_image_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
