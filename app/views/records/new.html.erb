@@ -1,0 +1,21 @@
+<h1>記録投稿</h1>
+
+<%= form_with model: @record, local:true do |f| %>
+  <div class="field">
+    <%= f.attachment_field :record_images_images, multiple: true, placeholder: "画像" %>
+  </div>
+
+  <div class="field">
+    <label for="inputDistance">距離</label>
+    <%= f.text_field :distance, id:"inputDistance", placeholder: "距離" %>km
+  </div>
+
+  <div class="field">
+    <label for="inputDescription">本文</label>
+    <%= f.text_area :description, id:"inputDescription", placeholder: "本文" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "投稿" %>
+  </div>
+<% end %>

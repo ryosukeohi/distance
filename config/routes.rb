@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :users ,except: [:create]
   get 'confirm' => 'users#confirm'
   resources :courses, only: [:index]
+  resources :records
 end

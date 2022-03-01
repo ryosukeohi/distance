@@ -1,0 +1,11 @@
+<h1>ランキング</h1>
+<table>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
+      <td><%= user.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
