@@ -2,6 +2,11 @@
 
 <%= form_with model: @record, local:true do |f| %>
   <div class="field">
+    <label for="inputDate">日付</label>
+    <%= f.datetime_select :start_time, id:"inputDate" %>
+  </div>
+
+  <div class="field">
     <%= f.attachment_field :record_images_images, multiple: true, placeholder: "画像" %>
   </div>
 
