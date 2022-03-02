@@ -15,7 +15,9 @@
     <%= date.day %>
     <% records.each do |record| %>
       <div>
-        <%= record.distance %>km
+        <%= link_to record_path(record.id) do %>
+          <%= record.distance %>km
+        <% end %>
       </div>
     <% end %>
   <% end %>

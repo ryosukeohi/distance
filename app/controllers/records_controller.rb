@@ -1,4 +1,8 @@
 class RecordsController < ApplicationController
+  def show
+    @record = Record.find(params[:id])
+  end
+
   def new
     @record = Record.new
   end
