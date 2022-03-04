@@ -1,4 +1,4 @@
-<h1>記録投稿</h1>
+<h1>コース編集</h1>
 
 <%= form_with model: @record, local:true do |f| %>
   <div class="field">
@@ -21,6 +21,12 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "投稿" %>
+    <%= f.submit "変更を保存" %>
   </div>
 <% end %>
+
+<div>
+  <% @record.record_images.each do |image| %>
+    <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
+  <% end %>
+</div>

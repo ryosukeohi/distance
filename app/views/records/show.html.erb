@@ -10,6 +10,13 @@
 </div>
 
 <div>
+  <% if @record.user.id == current_user.id %>
+    <%= link_to "編集", edit_record_path(@record) %>
+    <%= link_to "削除",record_path(@record), method: :delete, "data-confirm" => "削除しますか?" %>
+  <% end %>
+</div>
+
+<div>
   <% @record.record_images.each do |image| %>
     <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
   <% end %>

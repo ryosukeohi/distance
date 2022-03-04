@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   get 'confirm' => 'users#confirm'
   resources :courses, only: [:index]
   resources :records, except: [:index]
+  delete '/record_images/:id' => 'record_images#delete'
 end
