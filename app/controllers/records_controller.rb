@@ -11,7 +11,7 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
     @record.user_id = current_user.id
     @record.save
-    redirect_to user_path(current_user.id)
+    redirect_to record_path(@record.id)
   end
 
   def edit
@@ -20,7 +20,7 @@ class RecordsController < ApplicationController
 
   def update
     @record = Record.find(params[:id])
-    @record.update
+    @record.update(record_params)
     redirect_to record_path(@record.id)
   end
 
