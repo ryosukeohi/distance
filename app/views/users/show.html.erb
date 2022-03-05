@@ -4,6 +4,7 @@
 <div>
   <%= @user.name %>
   <%= @user.introduction %>
+  <%= @total %>km
   <% if @user.id == current_user.id %>
     <%= link_to "記録投稿", new_record_path %>
     <%= link_to "編集", edit_user_path(current_user.id) %>

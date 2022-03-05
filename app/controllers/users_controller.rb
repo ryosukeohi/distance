@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @records = current_user.records
+    @month = params[:month] ? Date.parse(params[month]) : Time.zone.today
+    @distances = Record.where(created_at: @month.all_month).where(user_id: current_user.id)
+    @total = @distances.all.sum('distance')
   end
 
   def edit
