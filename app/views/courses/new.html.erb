@@ -1,0 +1,64 @@
+<div id="map"></div>
+
+<style>
+  #map {
+    height: 500px;
+    width: 500px;
+  }
+</style>
+
+<script>
+  let mapInstance = {};
+  let marker;
+  let geocoder;
+  const ikebukuroStastionLat = 35.728926;
+  const ikebukuroStastionLng = 139.71038;
+
+  function intiMap() {
+    geocoder = new google.maps.Geocoder();
+
+    mapInstance = new.google.maps.Map(document.getElementById('map'), {
+      center: {latitude: ikebukuroStastionLat, longitude: ikebukuroStastionLng},
+      zoom:12;
+      mapTypeControl: false
+    });
+
+    mapInstance.addListener('click', function(e) {
+      getClickLatLng(e.latlng, mapInstance);
+    });
+  }
+
+  function getClickLatLng(latlng, mapInstance) {
+    document.getElementById('road_latitude').value = latlng.lat();
+    document.getElementById('road_longitude').value = latlng.lng();
+
+    deleteMarker();
+
+    marker = new google.maps.Marker({
+      position: latlng,
+      map: mapInstance
+    });
+
+    mapInstance.panTo(latlng);
+  }
+
+  function deleteMarker() {
+    if(marker != null){
+      marker.setMap(null);
+    }
+    marker = null;
+  }
+
+  function searchArea() {
+    let inputAddress = document.getElementById('address').value;
+
+    geocoder.geocode( { 'address': inputAddress }, function(results, status) {
+      if (status == "OK") {
+        mapInstance.setCenter(results[0].geometry.location);
+      } else {
+        alert('一致しませんでした:' + status);
+      }
+    });
+  }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY']%>"></script>
