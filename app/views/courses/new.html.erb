@@ -4,7 +4,7 @@
 <input type="button" value="検索" onclick="codeAddress()">
 
 <%= form_with model: @course, local:true do |f| %>
-  <input type="hidden" name="map[address]" id="hidden_address">
+  <input type="hidden" name="course[address]" id="hidden_address">
 
   <div class="field">
     <%= f.attachment_field :course_images_images, multiple: true %>
@@ -42,7 +42,7 @@
   let map
   let geododer
 
-  function initMap(){
+  function initMap() {
     geocoder = new google.maps.Geocoder()
     map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 35.728926, lng: 139.71038},
@@ -51,11 +51,11 @@
   }
 
   function codeAddress() {
-    let inputAdderss =document.getElementById('address').value;
+    let inputAddress = document.getElementById('address').value;
 
     geocoder.geocode({
-      'address': inputAdderss
-    }, function(results, status) {
+      'address': inputAddress
+    }, function (results, status) {
       if (status == 'OK') {
         map.setCenter(results[0].geometry.location);
 
@@ -63,8 +63,9 @@
           map: map,
           position: results[0].geometry.location
         });
+
         let hidden_address = document.getElementById('hidden_address');
-        hidden_address.settAtribute("value", inputAdderss);
+        hidden_address.setAttribute("value", inputAddress);
 
       } else {
         alert("失敗しました" + status);

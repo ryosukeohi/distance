@@ -24,6 +24,6 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:title, :distance, :description, :latitude, :longitude, course_images_images: [])
+    params.require(:course).permit(:title, :address, :distance, :description, :latitude, :longitude, course_images_images: [])
   end
 end
