@@ -3,16 +3,21 @@ class CoursesController < ApplicationController
     @courses = Course.all
   end
 
+  def show
+    @course = course.find(params[:id])
+  end
+
   def new
     @course = Course.new
   end
 
   def create
     @course = Course.new(course_params)
+    @course.user_id = current_user.id
     if @course.save
       redirect_to course_path(@course)
     else
-      render 'course/new'
+      redirect_to new_course_path
     end
   end
 

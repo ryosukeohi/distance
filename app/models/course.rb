@@ -5,5 +5,5 @@ class Course < ApplicationRecord
   accepts_attachments_for :course_images, attachment: :image
 
   geocoded_by :address
-  after_validation :geodode
+  after_validation :geocode
 end
