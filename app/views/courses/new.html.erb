@@ -1,5 +1,36 @@
 <div id='map'></div>
 
+<input id="address" type="textbox">
+<input type="button" value="検索" onclick="codeAddress()">
+
+<%= form_with model: @course, local:true do |f| %>
+<input type="hidden" name="map[address]" id="hidden_address">
+
+<div class="field">
+    <%= f.attachment_field :course_images_images, multiple: true %>
+  </div>
+
+  <div class="field">
+    <label for="inputTitle">タイトル</label>
+    <%= f.text_field :title, id:"inputTitle", placeholder: "タイトル" %>km
+  </div>
+
+  <div class="field">
+    <label for="inputDistance">距離</label>
+    <%= f.text_field :distance, id:"inputDistance", placeholder: "距離" %>km
+  </div>
+
+  <div class="field">
+    <label for="inputDescription">本文</label>
+    <%= f.text_area :description, id:"inputDescription", placeholder: "本文" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "投稿" %>
+  </div>
+
+<% end %>
+
 <style>
   #map{
     height: 500px;
@@ -8,10 +39,33 @@
 </style>
 
 <script>
+
+  let map
+  let geododer
+
   function initMap(){
-    let map = new google.maps.Map(document.getElementById('map'), {
+    geocoder = new google.maps.Geocoder()
+    map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 35.728926, lng: 139.71038},
-      zoom: 12
+      zoom: 15
+    });
+  }
+
+  function codeAddress() {
+    let inputAdderss =document.getElementById('address').value;
+
+    geocoder.geocode({
+      'address': inputAdderss
+    }, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert("失敗しました" + status);
+      }
     });
   }
 </script>
