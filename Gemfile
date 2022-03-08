@@ -71,3 +71,6 @@ gem "refile-mini_magick"
 gem 'simple_calendar', '~> 2.0'
 
 gem 'dotenv-rails'
+gem 'gmaps4rails'
+gem 'geocoder'
+gem 'gon'
