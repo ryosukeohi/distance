@@ -1,2 +1,80 @@
 <h1>マイコース一覧</h1>
 <%= link_to "コース投稿", new_course_path %>
+
+<div id='map'></div>
+
+<div>
+  <% @courses.each do |course| %>
+    <%= link_to course_path(course.id) do %>
+    <%= course.title %>
+    <% end %>
+  <% end %>
+</div>
+
+<style>
+  #map{
+    height: 300px;
+    width: 300px;
+  }
+</style>
+
+<script>
+
+  let mapInstance
+  let geocoder
+  let marker
+  <% @courses.each do |course| %>
+    const savedLat = <%= course.latitude %>
+    const savedLng = <%= course.longitude %>
+  <% end %>
+
+  function initMap(){
+    // geocoder = new google.maps.Geocoder()
+
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: savedLat, lng: savedLng},
+      zoom: 15
+    });
+
+    pos = new google.maps.LatLng(
+      savedLat,
+      savedLng
+      );
+    default_marker = new google.maps.Marker({
+      map: mapInstance,
+      position: pos,
+      icon: {
+        url: ' https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+        scaledSize: new google.maps.Size(40, 40)
+      }
+    });
+  }
+
+  function codeAddress() {
+    let inputAdderss = document.getElementById('address').value;
+
+    geocoder.geocode({
+      'address': inputAdderss
+    }, function(results, status) {
+      if (status == 'OK') {
+        mapInstance.setCenter(results[0].geometry.location);
+
+        if(marker != null){
+          marker.setMap(null);
+        }
+        marker = null;
+
+        marker = new google.maps.Marker({
+          map: mapInstance,
+          position: results[0].geometry.location
+        });
+
+        // let hidden_address = document.getElementById('hidden_address');
+        // hidden_address.setAttribute("value", inputAddress);
+      } else {
+        alert("失敗しました" + status);
+      }
+    });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>

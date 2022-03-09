@@ -34,8 +34,8 @@
     });
 
     pos = new google.maps.LatLng(
-      <%= @course.latitude %>,
-      <%= @course.longitude %>
+      savedLat,
+      savedLng
       );
     default_marker = new google.maps.Marker({
       map: mapInstance,
