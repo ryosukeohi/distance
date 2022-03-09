@@ -18,19 +18,23 @@
 
 <script>
 
-  let map
-  let geododer
+  let mapInstance
+  let geocoder
   let marker
 
+  const savedLat = <%= @course.latitude %>
+  const savedLng = <%= @course.longitude %>
+
   function initMap(){
-    geocoder = new google.maps.Geocoder()
+    // geocoder = new google.maps.Geocoder()
+
     mapInstance = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 35.728926, lng: 139.71038},
+      center: { lat: savedLat, lng: savedLng},
       zoom: 15
     });
 
     pos = new google.maps.LatLng(
-      <%= @course.latitude %>
+      <%= @course.latitude %>,
       <%= @course.longitude %>
       );
     default_marker = new google.maps.Marker({
@@ -44,7 +48,7 @@
   }
 
   function codeAddress() {
-    let inputAdderss =document.getElementById('address').value;
+    let inputAdderss = document.getElementById('address').value;
 
     geocoder.geocode({
       'address': inputAdderss
@@ -61,6 +65,9 @@
           map: mapInstance,
           position: results[0].geometry.location
         });
+
+        // let hidden_address = document.getElementById('hidden_address');
+        // hidden_address.setAttribute("value", inputAddress);
       } else {
         alert("失敗しました" + status);
       }
