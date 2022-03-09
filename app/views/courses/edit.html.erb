@@ -1,5 +1,11 @@
 <div id='map'></div>
 
+<div>
+  <% @course.course_images.each do |image| %>
+    <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
+  <% end %>
+</div>
+
 <input id="address" type="textbox">
 <input type="button" value="検索" onclick="codeAddress()">
 
@@ -43,23 +49,40 @@
   let geocoder
   // let marker
 
-  function initMap() {
+  const savedLat = <%= @course.latitude %>
+  const savedLng = <%= @course.longitude %>
+
+  function initMap(){
     geocoder = new google.maps.Geocoder()
 
     map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 35.728926, lng: 139.71038},
+      center: { lat: savedLat, lng: savedLng},
       zoom: 15
+    });
+
+    pos = new google.maps.LatLng(
+      savedLat,
+      savedLng
+      );
+    const default_marker = new google.maps.Marker({
+      map: map,
+      position: pos
     });
   }
 
   function codeAddress() {
-    let inputAddress = document.getElementById('address').value;
+    let inputAdderss = document.getElementById('address').value;
 
     geocoder.geocode({
-      'address': inputAddress
-    }, function (results, status) {
+      'address': inputAdderss
+    }, function(results, status) {
       if (status == 'OK') {
         map.setCenter(results[0].geometry.location);
+
+        if(marker != null){
+          marker.setMap(null);
+        }
+        marker = null;
 
         var marker = new google.maps.Marker({
           map: map,
@@ -68,7 +91,6 @@
 
         let hidden_address = document.getElementById('hidden_address');
         hidden_address.setAttribute("value", inputAddress);
-
       } else {
         alert("失敗しました" + status);
       }
