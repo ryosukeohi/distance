@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_072917) do
+ActiveRecord::Schema.define(version: 2022_03_10_011029) do
+
+  create_table "course_comments", force: :cascade do |t|
+    t.text "comment", null: false
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "course_images", force: :cascade do |t|
     t.integer "course_id", null: false

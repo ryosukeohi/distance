@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :courses, dependent: :destroy
   has_many :records, dependent: :destroy
+  has_many :course_comments, dependent: :destroy
 
   attachment :profile_image
 end

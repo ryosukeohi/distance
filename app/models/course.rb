@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :user
   has_many :course_images, dependent: :destroy
+  has_many :course_comments, dependent: :destroy
 
   accepts_attachments_for :course_images, attachment: :image
 
