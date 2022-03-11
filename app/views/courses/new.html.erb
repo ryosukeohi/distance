@@ -4,7 +4,7 @@
 <input type="button" value="検索" onclick="codeAddress()">
 
 <%= form_with model: @course, local:true do |f| %>
-  <input type="hidden" name="course[address]" id="hidden_address">
+  <input type="hidden" name="map[address]" id="hidden_address">
 
   <div class="field">
     <%= f.attachment_field :course_images_images, multiple: true %>
@@ -41,7 +41,6 @@
 
   let map
   let geocoder
-  // let marker
 
   function initMap() {
     geocoder = new google.maps.Geocoder()
