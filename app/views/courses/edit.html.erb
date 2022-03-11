@@ -47,7 +47,7 @@
 
   let map
   let geocoder
-  // let marker
+  let marker
 
   const savedLat = <%= @course.latitude %>
   const savedLng = <%= @course.longitude %>
@@ -64,7 +64,7 @@
       savedLat,
       savedLng
       );
-     const default_marker = new google.maps.Marker({
+    default_marker = new google.maps.Marker({
       map: map,
       position: pos
     });
