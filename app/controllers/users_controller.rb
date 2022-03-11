@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @users = Record.where(start_time: Time.current.all_month).order('sum(distance) desc').pluck(:user_id)
+    @users = User.where(id: Record.group(:user_id).where(created_at: Time.current.all_month).order('sum(distance) desc').pluck(:user_id))
   end
 
   def show
     @user = User.find(params[:id])
-    @records = current_user.records
+    @records = Record.where(user_id: @user.id)
     @distances = Record.where(start_time: Time.current.all_month).where(user_id: current_user.id)
     @total = @distances.all.sum('distance')
   end
