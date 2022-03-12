@@ -42,6 +42,12 @@ class CoursesController < ApplicationController
     redirect_to user_path(current_user.id)
   end
 
+  def search
+    @courses = Course.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "search"
+  end
+
   private
 
   def course_params

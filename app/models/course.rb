@@ -7,4 +7,8 @@ class Course < ApplicationRecord
 
   geocoded_by :address
   before_validation :geocode
+
+  def self.search(keyword)
+    where(["title like? OR description like?", "%#{keyword}%", "%#{keyword}%"])
+  end
 end
