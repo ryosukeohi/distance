@@ -9,7 +9,7 @@
     <%= link_to "記録投稿", new_record_path %>
     <%= link_to "編集", edit_user_path(current_user.id) %>
     <%= link_to "マイコース一覧", mycourse_path(current_user.id) %>
-    <%= link_to "コース投稿", new_course_path %>
+    <%= link_to "コース投稿", new_course_path, data: {"turbolinks"=>false} %>
   <% end %>
 </div>
 

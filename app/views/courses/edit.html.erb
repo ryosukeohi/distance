@@ -11,6 +11,7 @@
 
 <%= form_with model: @course, local:true do |f| %>
   <input type="hidden" name="course[address]" id="hidden_address">
+  <!--<%= f.hidden_field :address, value: :inputAdderss %>-->
 
   <div class="field">
     <%= f.attachment_field :course_images_images, multiple: true %>
@@ -32,7 +33,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "投稿" %>
+    <%= f.submit "変更を保存" %>
   </div>
 <% end %>
 
@@ -64,17 +65,17 @@
       savedLat,
       savedLng
       );
-    default_marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
       map: map,
       position: pos
     });
   }
 
   function codeAddress() {
-    let inputAdderss = document.getElementById('address').value;
+    let inputAddress = document.getElementById('address').value;
 
     geocoder.geocode({
-      'address': inputAdderss
+      'address': inputAddress
     }, function(results, status) {
       if (status == 'OK') {
         map.setCenter(results[0].geometry.location);

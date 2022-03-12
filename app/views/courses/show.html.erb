@@ -2,7 +2,7 @@
 
 <div>
   <%= @course.title %>
-  <%= @course.distance %>
+  <%= @course.distance %>km
   <%= @course.description %>
   <% @course.course_images.each do |image| %>
     <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
@@ -36,56 +36,55 @@
 <script>
 
   let mapInstance
-  // let geocoder
+  let geocoder
   let marker
 
-  const savedLat = <%= @course.latitude %>
-  const savedLng = <%= @course.longitude %>
-
   function initMap(){
-    // geocoder = new google.maps.Geocoder()
+    const savedLat = <%= @course.latitude %>
+    const savedLng = <%= @course.longitude %>
+    geocoder = new google.maps.Geocoder()
 
     mapInstance = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: savedLat, lng: savedLng},
+      center: { lat: savedLat, lng: savedLng },
       zoom: 15
     });
 
-    const pos = new google.maps.LatLng(
+    pos = new google.maps.LatLng(
       savedLat,
       savedLng
       );
-    const default_marker = new google.maps.Marker({
+    default_marker = new google.maps.Marker({
       map: mapInstance,
       position: pos
     });
   }
 
-  // function codeAddress() {
-  //   let inputAdderss = document.getElementById('address').value;
+  function codeAddress() {
+    let inputAddress = document.getElementById('address').value;
 
-  //   geocoder.geocode({
-  //     'address': inputAdderss
-  //   }, function(results, status) {
-  //     if (status == 'OK') {
-  //       mapInstance.setCenter(results[0].geometry.location);
+    geocoder.geocode({
+      'address': inputAddress
+    }, function(results, status) {
+      if (status == 'OK') {
+        mapInstance.setCenter(results[0].geometry.location);
 
-  //       if(marker != null){
-  //         marker.setMap(null);
-  //       }
-  //       marker = null;
+        if(marker != null){
+          marker.setMap(null);
+        }
+        marker = null;
 
-  //       marker = new google.maps.Marker({
-  //         map: mapInstance,
-  //         position: results[0].geometry.location
-  //       });
+        marker = new google.maps.Marker({
+          map: mapInstance,
+          position: results[0].geometry.location
+        });
 
-  //       let hidden_address = document.getElementById('hidden_address');
-  //       hidden_address.setAttribute("value", inputAddress);
-  //     } else {
-  //       alert("失敗しました" + status);
-  //     }
-  //   });
-  // }
+        let hidden_address = document.getElementById('hidden_address');
+        hidden_address.setAttribute("value", inputAddress);
+      } else {
+        alert("失敗しました" + status);
+      }
+    });
+  }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
 <%= link_to "編集", edit_course_path(@course) %>
