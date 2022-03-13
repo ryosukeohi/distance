@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :courses do
     resources :course_comments, only: [:create, :destroy]
   end
-  get 'search' => 'courses#search'
   get 'mycourse' => 'courses#mycourse'
   resources :records, except: [:index]
   resources :record_images, only: [:destroy]
+  get 'search' => 'searches#search'
 end

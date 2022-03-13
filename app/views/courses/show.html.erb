@@ -59,5 +59,7 @@
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
-<%= link_to "編集", edit_course_path(@course) %>
-<%= link_to "削除", course_path(@course), method: :delete, "data-confirm" => "削除しますか?" %>
+<% if @course.user_id == current_user.id %>
+  <%= link_to "編集", edit_course_path(@course) %>
+  <%= link_to "削除", course_path(@course), method: :delete, "data-confirm" => "削除しますか?" %>
+<% end %>

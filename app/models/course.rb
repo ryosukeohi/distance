@@ -8,7 +8,7 @@ class Course < ApplicationRecord
   geocoded_by :address
   before_validation :geocode
 
-  def self.search(keyword)
-    where(["title like? OR description like?", "%#{keyword}%", "%#{keyword}%"])
+  def self.looks(word)
+    @courses = Course.where(["title LIKE? OR description LIKE?", "%#{word}%", "%#{word}%"])
   end
 end

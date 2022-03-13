@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :course_comments, dependent: :destroy
 
   attachment :profile_image
+
+  def self.looks(word)
+    @users = User.where(["name LIKE? OR introduction LIKE?", "%#{word}%", "%#{word}%"])
+  end
 end

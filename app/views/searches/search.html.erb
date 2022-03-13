@@ -1,0 +1,9 @@
+<% if @range == "User" %>
+  <% @users.each do |user| %>
+    <%= user.name %>
+  <% end %>
+<% else %>
+  <% @courses.each do |course| %>
+    <%= course.title %>
+  <% end %>
+<% end %>

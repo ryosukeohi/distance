@@ -1,1 +1,6 @@
 <p>トップページ（コース一覧）</p>
+<% @courses.each do |course| %>
+  <%= link_to course_path(course) do %>
+    <%= course.title %>
+  <% end %>
+<% end %>
