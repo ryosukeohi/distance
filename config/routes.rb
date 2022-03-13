@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'confirm' => 'users#confirm'
   resources :courses do
     resources :course_comments, only: [:create, :destroy]
+    resource :likes, only: [:create, :destroy]
   end
   get 'mycourse' => 'courses#mycourse'
   resources :records, except: [:index]

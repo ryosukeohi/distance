@@ -8,6 +8,19 @@
     <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
   <% end %>
 </div>
+<% if @course.like_by?(current_user) %>
+<p>
+  <%= link_to course_likes_path(@course), method: :delete do %>
+  ♥<%= @course.likes.count %>いいね
+  <% end %>
+</p>
+<% else %>
+<p>
+  <%= link_to course_likes_path(@course), method: :post do %>
+  ♡<%= @course.likes.count %>いいね
+  <% end %>
+</p>
+<% end %>
 
 <div>
   <%= form_with model:[@course, @course_comment], local:true do |f| %>
