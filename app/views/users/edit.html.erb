@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container-fluid bg-light">
 <div class="row">
-<div class="border col-5 mt-5 justify-content-center d-flex align-items-center">
+<div class="col-5 mt-5 justify-content-center d-flex align-items-center mx-auto">
 <div class="form">
 <h4>会員情報編集</h4>
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", class: "mb-2" %>
 
 <%= form_with model: @user, local:true do |f| %>
   <div class="form-group">
@@ -19,7 +20,7 @@
     <%= f.text_area :introduction, id:"inputIntroduction", placeholder: "自己紹介" %>
   </div>
 
-  <div class="btn-group">
+  <div class="btn-group mb-2">
     <%= f.submit "保存", class: "btn btn-success mr-3" %>
     <%= link_to "退会", confirm_path, class: "btn btn-danger" %>
   </div>

@@ -1,26 +1,32 @@
+<div class="container-fluid bg-light">
+  <div class="row">
+<div class=" col-6">
 <div id='map'></div>
-
 <input id="address" type="textbox">
 <input type="button" value="検索" onclick="codeAddress()">
+</div>
 
+<div class="col-4 text-left d-flex align-items-center">
+
+<div class="form">
 <%= form_with model: @course, local:true do |f| %>
   <input type="hidden" name="course[address]" id="hidden_address">
 
-  <div class="field">
+  <div class="form-group text-right">
     <%= f.attachment_field :course_images_images, multiple: true %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputTitle">タイトル</label>
-    <%= f.text_field :title, id:"inputTitle", placeholder: "タイトル" %>
+    <%= f.text_field :title, id:"inputTitle", placeholder: "タイトル", class: "col-5" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputDistance">距離</label>
     <%= f.text_field :distance, id:"inputDistance", placeholder: "距離" %>km
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputDescription">本文</label>
     <%= f.text_area :description, id:"inputDescription", placeholder: "本文" %>
   </div>
@@ -29,6 +35,10 @@
     <%= f.submit "投稿" %>
   </div>
 <% end %>
+</div>
+</div>
+</div>
+</div>
 
 <style>
   #map{
