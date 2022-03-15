@@ -22,7 +22,7 @@
 </div>
 </div>
 
-<div class="rowfloat-left text-center mt-2">
+<div class="row float-left text-center mt-2">
   <% @record.record_images.each do |image| %>
     <%= attachment_image_tag image, :image, :fill, 300, 200, format: 'jpeg', class: "mr-1" %>
   <% end %>

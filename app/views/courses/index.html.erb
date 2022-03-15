@@ -1,6 +1,23 @@
-<p>トップページ（コース一覧）</p>
-<% @courses.each do |course| %>
-  <%= link_to course_path(course) do %>
-    <%= course.title %>
+<main class="main-v">
+<div class="main-container">
+  <%= image_tag 'runners.png', :width => '100%', :height => '400' %>
+</div>
+</main>
+
+<div class="container-fluid">
+<div class="row bg-light float-left">
+  <div class="col-4 border">
+  <% @courses.each do |course| %>
+    <% course.course_images.first(1).each do |image| %>
+      <%= link_to course_path(course) do %>
+        <%= attachment_image_tag image, :image, :fill, 250, 150, format: 'jpeg' %>
+      <% end %>
+    <% end %>
+    <%= link_to course_path(course) do %>
+      <%= course.title %>
+    <% end %>
   <% end %>
-<% end %>
+</div>
+</div>
+</div>
+</div>
