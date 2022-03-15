@@ -1,33 +1,43 @@
-<h1>コース編集</h1>
+<div class="container-fluid bg-light">
+  <div class="row"></div>
+  <div class="col justify-content-center d-flex align-items-center mt-5">
+    <div class="form">
+<h1>記録編集</h1>
 
 <%= form_with model: @record, local:true do |f| %>
-  <div class="field">
+  <div class="form-group">
     <label for="inputDate">日付</label>
     <%= f.datetime_select :start_time, id:"inputDate" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.attachment_field :record_images_images, multiple: true, placeholder: "画像" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputDistance">距離</label>
     <%= f.text_field :distance, id:"inputDistance", placeholder: "距離" %>km
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputDescription">本文</label>
     <%= f.text_area :description, id:"inputDescription", placeholder: "本文" %>
   </div>
 
-  <div class="actions">
+  <div class="actions mb-2">
     <%= f.submit "変更を保存" %>
   </div>
 <% end %>
+</div>
+</div>
 
-<div>
+<div class="row flex-right">
+  <div class="col-2">
   <% @record.record_images.each do |image| %>
-    <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
+    <%= attachment_image_tag image, :image, :fill, 200, 150, format: 'jpeg' %>
     <%= link_to "削除", record_image_path(image), method: :delete, "data-confirm" => "削除しますか?" %>
   <% end %>
+</div>
+</div>
+</div>
 </div>

@@ -1,13 +1,19 @@
 <h1>ランキング</h1>
-<table>
+<table class="table">
   <tbody>
     <% @users.each do |user| %>
+    <!--<% records = @records.where(user_id: user.id) %>-->
+    <!--<% distances = records.where(start_time: Time.current.all_month).where(user_id: user.id) %>-->
+    <!--<% total = distances.all.sum('distance') %>-->
     <tr>
       <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
       <td>
         <%= link_to user_path(user) do %>
         <%= user.name %>
         <% end %>
+      </td>
+      <td>
+        <%= total %>km
       </td>
     </tr>
     <% end %>
