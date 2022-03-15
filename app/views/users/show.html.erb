@@ -1,16 +1,22 @@
-<div>
-  <%= attachment_image_tag @user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
+<div class="container-fluid bg-light">
+  <div class="row">
+<div class="col-4 text-right">
+  <%= attachment_image_tag @user, :profile_image, :fill, 300, 300, format: 'jpeg', fallback: "no_image.jpg" %>
 </div>
-<div>
-  <%= @user.name %>
+<div class="col-4">
+  <h2><%= @user.name %></h2>
+  <h3><%= @total %>km</h3></br>
   <%= @user.introduction %>
-  <%= @total %>km
+</div>
+<div class="col-2">
   <% if @user.id == current_user.id %>
-    <%= link_to "記録投稿", new_record_path %>
-    <%= link_to "編集", edit_user_path(current_user.id) %>
-    <%= link_to "マイコース一覧", mycourse_path(current_user.id) %>
-    <%= link_to "コース投稿", new_course_path, data: {"turbolinks"=>false} %>
+    <%= link_to "記録投稿", new_record_path, class: "btn btn-secondary mb-1 mt-3 fas fa-pen" %></br>
+    <%= link_to "プロフィール編集", edit_user_path(current_user.id), class: "btn btn-secondary mb-2 fas fa-user-edit" %></br>
+    <%= link_to "マイコース一覧", mycourse_path(current_user.id), class: "btn btn-secondary mb-2 fas fa-road" %></br>
+    <%= link_to "コース投稿", new_course_path,  class: "btn btn-secondary fas fa-map-marker-alt" %>
   <% end %>
+</div>
+</div>
 </div>
 
 <div>
@@ -18,7 +24,7 @@
     <%= date.day %>
     <% records.each do |record| %>
       <div>
-        <%= link_to record_path(record.id) do %>
+        <%= link_to record_path(record) do %>
           <%= record.distance %>km
         <% end %>
       </div>

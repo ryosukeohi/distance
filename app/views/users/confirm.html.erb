@@ -1,5 +1,11 @@
-<p>退会しますか？</p>
-<div>
-  <%= link_to "戻る", user_path(current_user.id) %>
-  <%= link_to "退会する", user_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %>
+<div class="container">
+<div class="row justify-content-center d-flex align-items-center mt-5">
+  <div class="col-4">
+  <h1>退会しますか？</h1>
+  <div class="btn-group">
+  <%= link_to "戻る", user_path(current_user.id), class: "btn btn-success mr-3" %>
+  <%= link_to "退会", user_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
+  </div>
+</div>
+</div>
 </div>

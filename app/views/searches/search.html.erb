@@ -1,9 +1,23 @@
 <% if @range == "User" %>
-  <% @users.each do |user| %>
-    <%= user.name %>
-  <% end %>
+<table>
+  <tr>
+    <% @users.each do |user| %>
+        <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
+        <td>
+          <%= link_to user_path(user) do %>
+          <%= user.name %>
+          <% end %>
+        </td>
+    <% end %>
+  </tr>
+</table>
 <% else %>
   <% @courses.each do |course| %>
-    <%= course.title %>
+    <% course.course_images.first(1).each do |image| %>
+      <%= link_to course_path(course) do %>
+        <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
+        <%= course.title %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>
