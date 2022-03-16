@@ -31,13 +31,13 @@
 </div>
 </div>
 
-<div class="row flex-right">
-  <div class="col-2">
+<div class="row ml-3">
   <% @record.record_images.each do |image| %>
     <%= attachment_image_tag image, :image, :fill, 200, 150, format: 'jpeg' %>
-    <%= link_to "削除", record_image_path(image), method: :delete, "data-confirm" => "削除しますか?" %>
+    <div class="col">
+    <%= link_to "削除", record_image_path(image), method: :delete, "data-confirm" => "削除しますか?", class: "btn btn-danger" %>
+    </div>
   <% end %>
-</div>
 </div>
 </div>
 </div>

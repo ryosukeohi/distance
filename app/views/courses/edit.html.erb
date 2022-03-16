@@ -1,34 +1,32 @@
+<div class="container-fluid bg-ligh">
+  <div class="row">
+    <div class="col-6">
 <div id='map'></div>
-
-<div>
-  <% @course.course_images.each do |image| %>
-    <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
-    <%= link_to "削除", course_image_path(image), method: :delete, "data-confirm" => "削除しますか?" %>
-  <% end %>
-</div>
-
 <input id="address" type="textbox">
 <input type="button" value="検索" onclick="codeAddress()">
+</div>
 
+<div class="col-lg-4 col-sm-12 text-left d-flex align-items-center max-auto">
+<div class="form">
 <%= form_with model: @course, local:true do |f| %>
   <input type="hidden" name="course[address]" id="hidden_address">
-  <!--<%= f.hidden_field :address, value: :inputAdderss %>-->
+  <%= f.hidden_field :address, value: :inputAdderss %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.attachment_field :course_images_images, multiple: true %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputTitle">タイトル</label>
     <%= f.text_field :title, id:"inputTitle", placeholder: "タイトル" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputDistance">距離</label>
     <%= f.text_field :distance, id:"inputDistance", placeholder: "距離" %>km
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <label for="inputDescription">本文</label>
     <%= f.text_area :description, id:"inputDescription", placeholder: "本文" %>
   </div>
@@ -37,6 +35,18 @@
     <%= f.submit "変更を保存" %>
   </div>
 <% end %>
+</div>
+</div>
+</div>
+<div class="row ml-3 mt-2">
+  <% @course.course_images.each do |image| %>
+    <%= attachment_image_tag image, :image, :fill, 200, 150 %>
+    <div class="col">
+    <%= link_to "削除", course_image_path(image), method: :delete, "data-confirm" => "削除しますか?", class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>
+</div>
 
 <style>
   #map{

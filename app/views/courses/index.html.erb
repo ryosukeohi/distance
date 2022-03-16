@@ -3,17 +3,15 @@
   <%= image_tag 'marathon.jpg', :width => '100%', :height => '450' %>
 </div>
 </main>
-
-<div class="card-list-container">
+<div class="card-deck" style="width: 100%">
 <% @courses.each do |course| %>
-  <div class="card w-20 mx-auto">
     <% course.course_images.first(1).each do |image| %>
-      <%= attachment_image_tag image, :image, :fill, 200, 150, format: 'jpeg' %>
+      <div class="card" style="width:3rem">
+      <%= attachment_image_tag image, :image, class: "card-img-top" %>
     <% end %>
     <%= link_to course_path(course) do %>
       <p><%= course.title %></p>
     <% end %>
-    </div>
-  <% end %>
 </div>
+<% end %>
 </div>
