@@ -1,17 +1,19 @@
 <h1>マイコース一覧</h1>
-<%= link_to "コース投稿", new_course_path %>
+<%= link_to "コース投稿", new_course_path, class: "btn btn-secondary mb-2" %>
 
-
-
-<div>
+<table class="table">
   <% @courses.each do |course| %>
+  <tr>
+    <td>
     <%= link_to course_path(course) do %>
       <%= course.title %>
-      <% course.course_images.first(1).each do |image| %>
-        <%= link_to course_path(course) do %>
-          <%= attachment_image_tag image, :image, :fill, 50, 50, format: 'jpeg' %>
-        <% end %>
-      <% end %>
     <% end %>
+    </td>
+    <td>
+      <% course.course_images.first(1).each do |image| %>
+        <%= attachment_image_tag image, :image, :fill, 200, 150, format: 'jpeg' %>
+      <% end %>
+    </td>
+  </tr>
   <% end %>
-</div>
+</table>

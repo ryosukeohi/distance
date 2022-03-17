@@ -24,7 +24,7 @@
 <% end %>
 <div class="btn-group ml-2">
 <% if @course.user_id == current_user.id %>
-  <%= link_to "編集", edit_course_path(@course), class: "btn btn-secondary text-right" %>
+  <%= link_to "編集", edit_course_path(@course), class: "btn btn-secondary text-right mr-2" %>
   <%= link_to "削除", course_path(@course), method: :delete, "data-confirm" => "削除しますか?", class: "btn btn-danger text-right" %>
 <% end %>
 </div>

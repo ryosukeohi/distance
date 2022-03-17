@@ -1,5 +1,6 @@
+<h1>検索結果</h1>
 <% if @range == "User" %>
-<table>
+<table class="table">
   <tr>
     <% @users.each do |user| %>
         <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
@@ -10,7 +11,7 @@
         </td>
     <% end %>
   </tr>
-</table>
+</table class="table">
 <% else %>
   <% @courses.each do |course| %>
     <% course.course_images.first(1).each do |image| %>
