@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :course_comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  validates :name, presence: true
+
   attachment :profile_image
 
   def self.looks(word)
