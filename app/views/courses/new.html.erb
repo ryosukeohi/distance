@@ -1,12 +1,19 @@
+
 <div class="container-fluid bg-light">
   <div class="row">
 <div class=" col-6">
+  <% if @course.errors.any? %>
+    <p><%=@course.errors.count %>件のエラーが発生しました</p>
+    <% @course.errors.full_messages.each do |message| %>
+    <%= message %>
+    <% end %>
+  <% end %>
 <div id='map'></div>
 <input id="address" type="textbox">
 <input type="button" value="検索" onclick="codeAddress()">
 </div>
 
-<div class="col-4 text-left d-flex align-items-center">
+<div class="col-5 text-left d-flex align-items-center">
 
 <div class="form">
 <%= form_with model: @course, local:true do |f| %>

@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
     if @course.save
       redirect_to course_path(@course)
     else
-      redirect_to new_course_path
+      render template: "courses/new"
     end
   end
 
@@ -32,8 +32,11 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    @course.update(course_params)
+    if @course.update(course_params)
     redirect_to course_path(@course)
+    else
+      render "courses/edit"
+    end
   end
 
   def destroy

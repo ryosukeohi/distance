@@ -1,4 +1,12 @@
 <div class="container-fluid bg-light">
+
+  <% if @record.errors.any? %>
+    <p><%=@record.errors.count %>件のエラーが発生しました</p>
+    <% @record.errors.full_messages.each do |message| %>
+    <%= message %>
+    <% end %>
+  <% end %>
+
   <div class="row">
     <div class="col justify-content-center d-flex align-items-center mt-5">
 <div class="form">

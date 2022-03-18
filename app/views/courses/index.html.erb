@@ -3,15 +3,20 @@
   <%= image_tag 'marathon.jpg', :width => '100%', :height => '450' %>
 </div>
 </main>
-<div class="card-deck" style="width: 100%">
+
+<div class="container">
+<div class="card d-flex flex-row" style="width: 250px">
 <% @courses.each do |course| %>
     <% course.course_images.first(1).each do |image| %>
-      <div class="card" style="width:3rem">
-      <%= attachment_image_tag image, :image, class: "card-img-top" %>
+      <%= attachment_image_tag image, :image, class: "card-img-top" %></br>
     <% end %>
-    <%= link_to course_path(course) do %>
-      <p><%= course.title %></p>
+    <div class="card-body d-flex flex-column">
+      <div class="card-title">
+        <%= link_to course_path(course) do %>
+          <%= course.title %>
+        <% end %>
+      </div>
+    </div>
     <% end %>
 </div>
-<% end %>
 </div>
