@@ -2,8 +2,10 @@
 <table class="table">
   <tbody>
     <% @users.each.with_index(1) do |user, i| %>
+    <% records = 0 %>
+    <% distances = 0 %>
     <% records = @records.where(user_id: user.id) %>
-    <% distances = records.where(start_time: Time.current.all_month).where(user_id: user.id) %>
+    <% distances = records.where(start_time: Time.current.all_month)%>
     <% total = distances.all.sum('distance') %>
     <tr>
       <td><h2><%= i %>位</h2></td>

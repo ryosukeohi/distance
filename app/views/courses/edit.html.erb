@@ -16,7 +16,6 @@
 <div class="form">
 <%= form_with model: @course, local:true do |f| %>
   <input type="hidden" name="course[address]" id="hidden_address">
-  <%= f.hidden_field :address, value: :inputAdderss %>
 
   <div class="form-group">
     <%= f.attachment_field :course_images_images, multiple: true %>

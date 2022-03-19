@@ -2,7 +2,7 @@ require 'rails_helper'
 describe 'RecourdsController', type: :request do
   before do
     @user = FactoryBot.create(:user, email: 'test@test')
-    @record = FactoryBot.create(:record, user_id: @user.id, distance: 'distance', start_time: 'start_time')
+    @record = FactoryBot.create(:record, user_id: @user.id, distance: 'distance')
   end
 
   describe 'GET #show' do
