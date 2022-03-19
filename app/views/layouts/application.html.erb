@@ -15,11 +15,11 @@
   <body>
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg bg-secondary">
-        <div class="container">
+        <div class="container-fluid">
           <% if user_signed_in? %>
-          <a class="navbar-brand p-3" href="/courses"><%= "ロゴ" %></a>
+          <a class="navbar-brand" href="/courses" id="logo"><%= "Distance" %></a>
           <% else %>
-          <a class="navbar-brand p-3" href="/"><%= "ロゴ" %></a>
+          <a class="navbar-brand" href="/" id="logo"><%= "Distance" %></a>
           <% end %>
           <button class="navbar-toggler" type="button" data-toggl="collapse" date-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <spam class="navbar-toggler-icon"></spam>

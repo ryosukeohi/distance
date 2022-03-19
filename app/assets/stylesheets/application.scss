@@ -14,6 +14,13 @@
  *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
+
+#logo {
+ font-family: 'Bungee', cursive;
+ color: white;
+ font-size: 50px;
+ }
