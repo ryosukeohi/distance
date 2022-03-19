@@ -3,6 +3,7 @@ RSpec.describe Record, type: :model do
   before do
     @record = FactoryBot.build(:record)
   end
+
   describe '記録投稿' do
     it 'distanceが空では登録できない' do
       @record.distance = ''

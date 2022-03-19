@@ -3,6 +3,7 @@ RSpec.describe Course, type: :model do
   before do
     @course = FactoryBot.build(:course)
   end
+
   describe 'コース投稿' do
     it 'titleが空では登録できない' do
       @course.title = ''

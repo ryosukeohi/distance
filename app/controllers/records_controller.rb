@@ -11,9 +11,9 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
     @record.user_id = current_user.id
     if @record.save
-       redirect_to record_path(@record.id)
+      redirect_to record_path(@record.id)
     else
-       render "records/new"
+      render "records/new"
     end
   end
 
@@ -34,6 +34,7 @@ class RecordsController < ApplicationController
   end
 
   private
+
   def record_params
     params.require(:record).permit(:start_time, :distance, :description, record_images_images: [])
   end
