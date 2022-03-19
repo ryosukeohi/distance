@@ -4,19 +4,24 @@
 </div>
 </main>
 
-<div class="container">
-<div class="card d-flex flex-row" style="width: 250px">
+
+<div class="container texts-wrapper bg-light">
+<div class="row mt-2">
 <% @courses.each do |course| %>
+<div class="col-lg-4">
+  <div class="card m-auto" style="width: 300px">
     <% course.course_images.first(1).each do |image| %>
-      <%= attachment_image_tag image, :image, class: "card-img-top" %></br>
+      <%= attachment_image_tag image, :image, class: "card-img-top" %>
     <% end %>
-    <div class="card-body d-flex flex-column">
+    <div class="card-body">
       <div class="card-title">
         <%= link_to course_path(course) do %>
-          <%= course.title %>
+          <p><%= course.title %></p>
         <% end %>
       </div>
     </div>
-    <% end %>
+</div>
+</div>
+<% end %>
 </div>
 </div>
