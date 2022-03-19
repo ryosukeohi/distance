@@ -6,9 +6,10 @@
 
 
 <div class="container texts-wrapper bg-light">
+<h2 class="text-center mt-2">コース一覧</h2>
 <div class="row mt-2">
 <% @courses.each do |course| %>
-<div class="col-lg-4">
+<div class="col-lg-4 mb-2">
   <div class="card m-auto" style="width: 300px">
     <% course.course_images.first(1).each do |image| %>
       <%= attachment_image_tag image, :image, class: "card-img-top" %>
