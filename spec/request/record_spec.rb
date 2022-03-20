@@ -2,6 +2,7 @@ require 'rails_helper'
 describe 'RecourdsController', type: :request do
   before do
     @user = FactoryBot.create(:user, email: 'test@test')
+    sign_in @user
     @record = FactoryBot.create(:record, user_id: @user.id, distance: 'distance')
   end
 
