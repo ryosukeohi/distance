@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :record do
-    distance { Faker::Lorem.characters(number: 5) }
+    distance {10}
     user_id {3}
     start_time {'2022/01/01'}
   end

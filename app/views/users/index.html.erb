@@ -9,7 +9,7 @@
     <% total = distances.all.sum('distance') %>
     <tr>
       <td><h2><%= i %>位</h2></td>
-      <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %></td>
+      <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
       <td>
         <%= link_to user_path(user) do %>
         <%= user.name %>
