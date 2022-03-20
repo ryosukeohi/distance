@@ -31,7 +31,7 @@
 </div>
 </div>
 
-<div>
+<div class="form mt-2">
   <%= form_with model:[@course, @course_comment], local:true do |f| %>
     <%= f.text_area :comment, rows:'5', placeholder: "コメント" %>
     <%= f.submit "送信" %>
@@ -40,8 +40,9 @@
 
 　<% @course.course_comments.each do |course_comment| %>
 　<div cass="row">
-    <%= attachment_image_tag course_comment.user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg" %>
-    <%= course_comment.created_at.strftime('%Y/%m/%d') %><%= course_comment.comment %>
+    <%= attachment_image_tag course_comment.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg" %>
+    <%= course_comment.created_at.strftime('%Y/%m/%d') %></br>
+    <%= course_comment.comment %>
     <% if course_comment.user_id == current_user.id %>
       <%= link_to "削除", course_course_comment_path(course_comment.course, course_comment), method: :delete %>
     <% end %>

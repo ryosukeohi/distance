@@ -11,7 +11,7 @@
       <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg", size:'50x50' %></td>
       <td>
         <%= link_to user_path(user) do %>
-        <%= user.name %>
+        <h4><%= user.name %></h4>
         <% end %>
       </td>
       <td><h3><%= total %>km</h3></td>
