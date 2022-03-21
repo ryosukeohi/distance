@@ -13,7 +13,7 @@ describe 'RecourdsController', type: :request do
     end
     it 'showアクションにリクエストするとレスポンスに投稿ずみのrecordが存在する' do
       get record_path(@record)
-      expect(response.body).to include(@record.distance)
+      expect(response.body).to include(@record.distance.to_s)
     end
   end
 end

@@ -19,6 +19,9 @@ class RecordsController < ApplicationController
 
   def edit
     @record = Record.find(params[:id])
+    if current_user != @record.user
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update

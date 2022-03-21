@@ -28,6 +28,9 @@ class CoursesController < ApplicationController
 
   def edit
     @course = Course.find(params[:id])
+    if current_user != @course.user
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
