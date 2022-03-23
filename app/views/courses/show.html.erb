@@ -7,21 +7,11 @@
   <h3><%= @course.distance %>km</h3></br>
   <p><%= @course.description %></p></br>
   <% @course.course_images.each do |image| %>
-    <%= attachment_image_tag image, :image, :fill, 200, 150, format: 'jpeg', class: "mr-2" %>
+    <%= attachment_image_tag image, :image, :fill, 200, 150, class: "mr-2" %>
   <% end %>
-<% if @course.like_by?(current_user) %>
-<p>
-  <%= link_to course_likes_path(@course), method: :delete do %>
-  ♥<%= @course.likes.count %>いいね
-  <% end %>
+<p id="like_buttons_<%= @course.id %>" >
+  <%= render "likes/like", course: @course %>
 </p>
-<% else %>
-<p>
-  <%= link_to course_likes_path(@course), method: :post do %>
-  ♡<%= @course.likes.count %>いいね
-  <% end %>
-</p>
-<% end %>
 <div class="btn-group ml-2">
 <% if @course.user_id == current_user.id %>
   <%= link_to "編集", edit_course_path(@course), class: "btn btn-secondary text-right mr-2" %>

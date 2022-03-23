@@ -20,7 +20,7 @@ class Course < ApplicationRecord
     @courses = Course.where(["title LIKE? OR description LIKE?", "%#{word}%", "%#{word}%"])
   end
 
-  def like_by?(user)
+  def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
 end
