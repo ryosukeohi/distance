@@ -4,6 +4,7 @@ describe 'RecourdsController', type: :request do
     @user = FactoryBot.create(:user)
     sign_in @user
     @record = FactoryBot.create(:record, user_id: @user.id, distance: 'distance')
+    @record.image = Rack::Test:UploadedFile.new(File.join(Rails.root,'spec/fixtures/images/test.jpg'))
   end
 
   describe 'GET #show' do
