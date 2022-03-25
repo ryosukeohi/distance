@@ -83,4 +83,4 @@ gem 'gmaps4rails'
 
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '~> 5.15.1'
