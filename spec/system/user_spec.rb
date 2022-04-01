@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '投稿のテスト', type: :system do
   before do
-   @user = FactoryBot.build(:user)
+   @user = FactoryBot.create(:user)
   end
   describe "ユーザー新規登録" do
     it "ユーザー新規登録ができるか" do
@@ -18,17 +18,18 @@ RSpec.describe '投稿のテスト', type: :system do
   end
   describe "記録投稿" do
     before do
-      @record = FactoryBot.build(:record)
+      @record = FactoryBot.create(:record, user_id: @user.id)
+      sign_in @user
     end
     context "正常に記録を投稿できるか" do
       it "投稿詳細に遷移するか" do
-        click_on "マイページ"
-        click_on "マイページ"
-        fill_in "description", with: @course.description
-        fill_in "distance", with: @course.distance
-        fill_in "start_time", with: @course.start_time
+        visit user_path(@user)
+        click_on "記録投稿"
+        fill_in "inputDescription", with: @record.description
+        fill_in "inputDistance", with: @record.distance
+        select "日付", from: "inputDate"
         click_on "投稿"
-        expect(current_path).to eq('/courses/' + @course.id.to_s)
+        expect(current_path).to eq('/records/' + @record.id.to_s)
        end
     end
   end
