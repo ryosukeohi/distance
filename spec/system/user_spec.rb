@@ -27,7 +27,7 @@ RSpec.describe '投稿のテスト', type: :system do
         click_on "記録投稿"
         fill_in "inputDescription", with: @record.description
         fill_in "inputDistance", with: @record.distance
-        select "日付", from: "inputDate"
+        select_date("2022,4,5", from: "inputDate")
         click_on "投稿"
         expect(current_path).to eq('/records/' + @record.id.to_s)
        end
