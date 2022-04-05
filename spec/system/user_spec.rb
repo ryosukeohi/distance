@@ -13,7 +13,7 @@ RSpec.describe '投稿のテスト', type: :system do
       fill_in "Password", with: @user.password
       fill_in "Password confirmation", with: @user.password
       click_on "Sign up"
-      expect(current_path).to eq('/courses')
+      expect(current_path).to eq courses_path
     end
   end
   describe "記録投稿" do
@@ -27,7 +27,7 @@ RSpec.describe '投稿のテスト', type: :system do
         click_on "記録投稿"
         fill_in "inputDescription", with: @record.description
         fill_in "inputDistance", with: @record.distance
-        select_date("2022,4,5", from: "inputDate")
+        select_date("2022,April,5", from: "日付")
         click_on "投稿"
         expect(current_path).to eq('/records/' + @record.id.to_s)
        end
