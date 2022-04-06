@@ -56,10 +56,12 @@ describe "ログイン後のテスト" do
     end
     context '投稿フォームの確認' do
       it '日付フォームが表示される' do
-        expect(page).to have_field 'record[start_time]'
+        expect(page).to have_select('record_start_time_1i')
+        expect(page).to have_select('record_start_time_2i')
+        expect(page).to have_select('record_start_time_3i')
       end
       it '画像フォームが表示される' do
-        expect(page).to have_field 'record_image[image]'
+        expect(page).to have_field 'record[record_image]'
       end
       it '距離フォームが表示される' do
         expect(page).to have_field 'record[distance]'
