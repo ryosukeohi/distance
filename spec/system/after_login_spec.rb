@@ -7,7 +7,6 @@ describe "ログイン後のテスト" do
   let!(:other_record) { create(:record, user_id: other_user.id) }
   let!(:course) { create(:course, user_id: user.id) }
   let!(:other_course) { create(:course, user_id: other_user.id) }
-  let!(:record_image) { create(:record_image, record_id: record.id) }
 
   before do
     visit new_user_session_path
@@ -59,15 +58,57 @@ describe "ログイン後のテスト" do
         expect(page).to have_select('record_start_time_1i')
         expect(page).to have_select('record_start_time_2i')
         expect(page).to have_select('record_start_time_3i')
+        expect(page).to have_select('record_start_time_4i')
+        expect(page).to have_select('record_start_time_5i')
       end
       it '画像フォームが表示される' do
-        expect(page).to have_field 'record[record_image]'
+        expect(page).to have_field 'record[record_images_images][]'
       end
       it '距離フォームが表示される' do
         expect(page).to have_field 'record[distance]'
       end
       it '本文フォームが表示される' do
         expect(page).to have_field 'record[description]'
+      end
+      it '投稿ボタンが表示される' do
+        expect(page).to have_button '投稿'
+      end
+    end
+
+    context '投稿成功の確認' do
+      before do
+        select_date("2022,April,5", from: "日付")
+        fill_in 'record[distance]', with: Faker::Lorem.characters(number: 3)
+        fill_in 'record[description]', with: Faker::Lorem.characters(number: 20)
+      end
+
+      it '正しく保存される' do
+        expect { click_button '投稿' }.to change(user.records, :count).by(1)
+      end
+      it 'リダイレクト先が投稿の詳細画面になっている' do
+        click_button '投稿'
+        expect(current_path).to eq '/records/' + Record.last.id.to_s
+      end
+    end
+  end
+
+  describe '投稿詳細画面のテスト' do
+    before do
+      visit record_path(record)
+    end
+
+    context '表示内容の確認' do
+      it 'urlが正しい' do
+        expect(current_path).to eq '/records/' + record.id.to_s
+      end
+      it '日付が表示される' do
+        expect(page).to have_content record.start_time.strftime('%Y/%m/%d')
+      end
+      it '本文が表示される' do
+        expect(page).to have_content record.description
+      end
+      it '距離が表示される' do
+        expect(page).to have_content record.distance
       end
     end
   end
