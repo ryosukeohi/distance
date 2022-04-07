@@ -110,6 +110,57 @@ describe "ログイン後のテスト" do
       it '距離が表示される' do
         expect(page).to have_content record.distance
       end
+       it '編集リンクが表示される' do
+         expect(page).to have_link '編集', href: edit_record_path(record)
+       end
+       it '削除リンクが表示される' do
+         expect(page).to have_link '削除', href: record_path(record)
+       end
+    end
+
+    context '編集リンクのテスト' do
+      it '編集画面に遷移する' do
+       click_link '編集'
+       expect(current_path).to eq '/records/' + record.id.to_s + '/edit'
+      end
+    end
+
+    context '削除リンクのテスト' do
+      before do
+        click_link '削除'
+      end
+      it '正しく削除される' do
+        expect(Record.where(id: record.id).count).to eq 0
+      end
+      it 'リダイレクト先がユーザー詳細画面になっている' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+  end
+
+  describe '投稿編集画面のテスト' do
+    before do
+      visit edit_record_path(record)
+    end
+
+    context '編集成功のテスト' do
+      before do
+        @record_old_distance = record.distance
+        @record_old_description = record.description
+        fill_in 'record[distance]', with: Faker::Lorem.characters(number: 3)
+        fill_in 'record[description]', with: Faker::Lorem.characters(number: 20)
+        click_button '変更を保存'
+      end
+
+      it '距離が正しく更新される' do
+        expect(record.reload.distance).not_to eq @record_old_distance
+      end
+      it '本文が正しく更新される' do
+        expect(record.reload.description).not_to eq @record_old_description
+      end
+      it 'リダイレクト先が投稿詳細画面になっている' do
+        expect(current_path).to eq '/records/' + record.id.to_s
+      end
     end
   end
 end
