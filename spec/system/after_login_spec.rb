@@ -35,7 +35,7 @@ describe "ログイン後のテスト" do
     end
   end
 
-  describe 'コース一覧のテスト' do
+  describe 'トップページ(コース一覧)のテスト' do
     before do
       visit courses_path
     end
@@ -64,10 +64,10 @@ describe "ログイン後のテスト" do
       it '画像フォームが表示される' do
         expect(page).to have_field 'record[record_images_images][]'
       end
-      it '距離フォームが表示される' do
+      it 'distanceフォームが表示される' do
         expect(page).to have_field 'record[distance]'
       end
-      it '本文フォームが表示される' do
+      it 'descriptionフォームが表示される' do
         expect(page).to have_field 'record[description]'
       end
       it '投稿ボタンが表示される' do
@@ -125,6 +125,13 @@ describe "ログイン後のテスト" do
       end
     end
 
+    context '他ユーザーの編集画面に遷移' do
+      it '遷移できない' do
+        visit edit_record_path(other_record)
+        expect(current_path).to eq('/users/' + user.id.to_s)
+      end
+    end
+
     context '削除リンクのテスト' do
       before do
         click_link '削除'
@@ -160,6 +167,47 @@ describe "ログイン後のテスト" do
       end
       it 'リダイレクト先が投稿詳細画面になっている' do
         expect(current_path).to eq '/records/' + record.id.to_s
+      end
+    end
+  end
+
+  describe 'コース投稿のテスト' do
+    before do
+      visit new_course_path
+    end
+
+    context '投稿フォームの確認' do
+      it '検索フォームが表示される' do
+        expect(page).to have_field 'address'
+        expect(page).to have_button 'Search'
+      end
+      it '画像フォームが表示される' do
+        expect(page).to have_field 'course[course_images_images][]'
+      end
+      it 'titleフォームが表示される' do
+        expect(page).to have_field 'course[title]'
+      end
+      it 'distanceフォームが表示される' do
+        expect(page).to have_field 'course[distance]'
+      end
+      it 'descriptionフォームが表示される' do
+        expect(page).to have_field 'course[description]'
+      end
+      it '投稿ボタンが表示される' do
+        expect(page).to have_button '投稿'
+      end
+    end
+
+    context '投稿成功のテスト' do
+      before do
+        fill_in 'address', with: "東京駅"
+        click_button "Search"
+        fill_in 'course[title]', with: "ランニングコース"
+        fill_in 'course[distance]', with: "10"
+        fill_in 'course[description]', with: "サンプルテキスト"
+      end
+      it '新しい投稿が正しく保存される' do
+        expect { click_button "投稿" }.to change(user.courses, :count).by(1)
       end
     end
   end
