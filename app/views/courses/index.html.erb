@@ -7,7 +7,7 @@
 <div class="col-lg-4 mb-2">
   <div class="card m-auto" style="width: 300px">
     <% course.course_images.first(1).each do |image| %>
-      <%= attachment_image_tag image, :image, class: "card-img-top" %>
+      <%= attachment_image_tag image, :image, format: 'jpeg', class: "card-img-top" %>
     <% end %>
     <div class="card-body">
       <div class="card-title">
