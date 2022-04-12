@@ -53,7 +53,7 @@ describe "ログイン後のテスト" do
   #   before do
   #     visit new_record_path
   #   end
-  #   context '投稿フォームの確認' do
+  #   context '記録投稿フォームの確認' do
   #     it '日付フォームが表示される' do
   #       expect(page).to have_select('record_start_time_1i')
   #       expect(page).to have_select('record_start_time_2i')
@@ -75,7 +75,7 @@ describe "ログイン後のテスト" do
   #     end
   #   end
 
-  #   context '投稿成功の確認' do
+  #   context '記録投稿成功の確認' do
   #     before do
   #       select_date("2022,April,5", from: "日付")
   #       fill_in 'record[distance]', with: Faker::Lorem.characters(number: 3)
@@ -92,7 +92,7 @@ describe "ログイン後のテスト" do
   #   end
   # end
 
-  # describe '投稿詳細画面のテスト' do
+  # describe '記録投稿詳細画面のテスト' do
   #   before do
   #     visit record_path(record)
   #   end
@@ -118,21 +118,21 @@ describe "ログイン後のテスト" do
   #     end
   #   end
 
-  #   context '編集リンクのテスト' do
+  #   context '記録編集リンクのテスト' do
   #     it '編集画面に遷移する' do
   #     click_link '編集'
   #     expect(current_path).to eq '/records/' + record.id.to_s + '/edit'
   #     end
   #   end
 
-  #   context '他ユーザーの編集画面に遷移' do
+  #   context '他ユーザーの記録編集画面に遷移' do
   #     it '遷移できない' do
   #       visit edit_record_path(other_record)
   #       expect(current_path).to eq('/users/' + user.id.to_s)
   #     end
   #   end
 
-  #   context '削除リンクのテスト' do
+  #   context '記録削除リンクのテスト' do
   #     before do
   #       click_link '削除'
   #     end
@@ -145,7 +145,7 @@ describe "ログイン後のテスト" do
   #   end
   # end
 
-  # describe '投稿編集画面のテスト' do
+  # describe '記録編集画面のテスト' do
   #   before do
   #     visit edit_record_path(record)
   #   end
@@ -176,7 +176,7 @@ describe "ログイン後のテスト" do
       visit new_course_path
     end
 
-    # context '投稿フォームの確認' do
+    # context 'コース投稿フォームの確認' do
     #   it '検索フォームが表示される' do
     #     expect(page).to have_field 'address'
     #     expect(page).to have_button 'Search'
@@ -225,7 +225,7 @@ describe "ログイン後のテスト" do
   #     end
   #   end
 
-  #   context '削除リンクのテスト' do
+  #   context 'コース削除リンクのテスト' do
   #     before do
   #       click_link '削除'
   #     end
@@ -239,7 +239,7 @@ describe "ログイン後のテスト" do
   #     end
   #   end
 
-  #   context '編集リンクのテスト' do
+  #   context 'コース編集リンクのテスト' do
   #     it '自分の編集画面に遷移する' do
   #       click_link '編集'
   #       expect(current_path).to eq '/courses/' + course.id.to_s + '/edit'
@@ -254,7 +254,7 @@ describe "ログイン後のテスト" do
   #   end
   # end
 
-  describe '自分の投稿の編集画面のテスト' do
+  describe '自分のコースの編集画面のテスト' do
     before do
       visit edit_course_path(course)
     end
@@ -327,10 +327,23 @@ describe "ログイン後のテスト" do
       end
     end
 
-    context '他人の編集画面に遷移' do
+    context '他のユーザー編集画面に遷移' do
       it '遷移できない' do
         visit edit_user_path(other_user)
         expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+
+    context '退会のテスト' do
+      before do
+        visit confirm_path
+      end
+      it 'ユーザー情報が削除される' do
+        expect { click_link '退会' }.to change {User.count}.by(-1)
+      end
+      it 'リダイレクト先がトップ画面になっている' do
+        click_link '退会'
+        expect(current_path).to eq '/'
       end
     end
   end
