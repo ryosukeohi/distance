@@ -246,7 +246,7 @@ describe "ログイン後のテスト" do
   #     end
   #   end
 
-  #   context '他のユーザーの編集画面に遷移' do
+  #   context '他のユーザーのコース編集画面に遷移' do
   #     it '遷移できない' do
   #       visit edit_course_path(other_course)
   #       expect(current_path).to eq '/users/' + user.id.to_s
@@ -258,12 +258,16 @@ describe "ログイン後のテスト" do
     before do
       visit edit_course_path(course)
     end
+
     context '表示内容の確認' do
       it 'urlが正しい' do
         expect(current_path).to eq '/courses/' + course.id.to_s + '/edit'
       end
       it 'title編集フォームが表示される' do
         expect(page).to have_field 'course[title]', with: course.title
+      end
+      it '画像フォームが表示される' do
+        expect(page).to have_field 'course[course_images_images][]'
       end
       it 'distance編集フォームが表示される' do
         expect(page).to have_field 'course[distance]', with: course.distance
@@ -275,28 +279,59 @@ describe "ログイン後のテスト" do
         expect(page).to have_button '変更を保存'
       end
     end
+  end
+
+  describe 'ユーザー情報編集画面のテスト' do
+    context '表示内容の確認' do
+      before do
+        visit edit_user_path(user)
+      end
+      it 'urlが正しい' do
+        expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+      end
+      it '画像フォームが表示さあれる' do
+        expect(page).to have_field 'user[profile_image]'
+      end
+      it 'nameフォームが表示さあれる' do
+        expect(page).to have_field 'user[name]'
+      end
+      it 'introductionフォームが表示される' do
+        expect(page).to have_field 'user[introduction]'
+      end
+      it '保存　ボタンが表示される' do
+        expect(page).to have_button '保存'
+      end
+      it '退会　ボタンが表示される' do
+        expect(page).to have_link '退会'
+      end
+    end
 
     context '編集成功のテスト' do
       before do
-        @course_old_title = course.title
-        @course_old_distance = course.distance
-        @course_old_description = course.description
-        fill_in 'course[title]', with: Faker::Lorem.characters(number: 5)
-        fill_in 'course[distance]', with: Faker::Lorem.characters(number: 5)
-        fill_in 'course[description]', with: Faker::Lorem.characters(number: 5)
-        click_button "変更を保存"
+        visit edit_user_path(user)
+        @user_old_name = user.name
+        @user_old_introduction = user.introduction
+        fill_in 'user[name]', with: Faker::Lorem.characters(number: 10)
+        fill_in 'user[introduction]', with: Faker::Lorem.characters(number: 20)
+        click_button '保存'
       end
 
-      it 'titleが正しく更新される' do
-        expect(course.reload.title).not_to eq @course_old_title
+      it 'nameが正しく変更される' do
+        expect(user.reload.name).not_to eq @user_old_name
       end
-      it 'distanceが正しく更新される' do
-        expect(course.reload.distance).not_to eq @course_old_distance
+      it 'introductionが正しく変更される' do
+        expect(user.reload.introduction).not_to eq @user_old_introduction
       end
-      it 'descriptionが正しく更新される' do
-        expect(course.reload.description).not_to eq @course_old_description
+      it 'リダイレクト先が自分のユーザー詳細画面になっている' do
+        expect(current_path).to eq '/users/' + user.id.to_s
       end
+    end
 
+    context '他人の編集画面に遷移' do
+      it '遷移できない' do
+        visit edit_user_path(other_user)
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
     end
   end
 end
