@@ -49,6 +49,19 @@ describe "ログイン後のテスト" do
     end
   end
 
+  describe 'ランキング画面のテスト' do
+    before do
+      visit users_path
+    end
+    it 'urlが正しい' do
+      expect(current_path).to eq '/users'
+    end
+    it '自分と他人の詳細のリンク先が正しい' do
+      expect(page).to have_link '', href: user_path(user)
+      expect(page).to have_link '', href: user_path(other_user)
+    end
+  end
+
   describe '記録投稿画面の確認' do
     before do
       visit new_record_path
