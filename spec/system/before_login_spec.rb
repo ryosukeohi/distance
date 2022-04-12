@@ -175,4 +175,65 @@ describe 'ログイン前のテスト' do
       end
     end
   end
+
+  describe 'ログインしていない場合ログイン画面に遷移する' do
+    let(:user) { create(:user) }
+    let!(:course) { create(:course, user: user) }
+    let!(:record) { create(:record, user: user) }
+
+    subject { current_path }
+
+    it 'ユーザー詳細画面' do
+      visit user_path(user)
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'ランキング画面' do
+      visit users_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'ユーザー編集画面' do
+      visit edit_user_path(user)
+      is_expected.to eq '/users/sign_in'
+    end
+    it '退会確認画面' do
+      visit confirm_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'コース詳細画面' do
+      visit course_path(course)
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'コース一覧画面(トップ画面)' do
+      visit courses_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'マイコース一覧画面' do
+      visit mycourse_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'コース投稿画面' do
+      visit new_course_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it 'コース編集画面' do
+      visit edit_course_path(course)
+      is_expected.to eq '/users/sign_in'
+    end
+    it '記録詳細画面' do
+      visit record_path(record)
+      is_expected.to eq '/users/sign_in'
+    end
+    it '記録投稿画面' do
+      visit new_record_path
+      is_expected.to eq '/users/sign_in'
+    end
+    it '記録編集画面' do
+      visit edit_record_path(record)
+      is_expected.to eq '/users/sign_in'
+    end
+    it '検索結果画面' do
+      visit search_path
+      is_expected.to eq '/users/sign_in'
+    end
+  end
 end
