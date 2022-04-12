@@ -20,16 +20,6 @@ RSpec.describe Course, type: :model do
       @course.valid?
       expect(@course.errors.full_messages).to include "Distance can't be blank"
     end
-    it 'latitudeが空では登録できない' do
-      @course.latitude = ''
-      @course.valid?
-      expect(@course.errors.full_messages).to include "Latitude can't be blank"
-    end
-    it 'longitudeが空では登録できない' do
-      @course.longitude = ''
-      @course.valid?
-      expect(@course.errors.full_messages).to include "Longitude can't be blank"
-    end
     it 'addressが空では登録できない' do
       @course.address = ''
       @course.valid?
