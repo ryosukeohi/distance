@@ -319,7 +319,7 @@ describe "ログイン後のテスト" do
       end
     end
 
-    context '編集成功のテスト' do
+    context 'ユーザー情報編集成功のテスト' do
       before do
         visit edit_user_path(user)
         @user_old_name = user.name
