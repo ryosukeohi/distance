@@ -21,4 +21,13 @@ RSpec.describe RecordsController, type: :controller do
       expect(record.distance).to eq 7
     end
   end
+
+  context 'DELETE #destroy' do
+    it '正常に削除される' do
+      record = create(:record, user: user)
+      expect {
+        delete :destroy, params: { record: attributes_for(:record), user_id: user.id, id: record}
+      }.to change(Record, :count).by(-1)
+    end
+  end
 end
