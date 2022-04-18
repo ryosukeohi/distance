@@ -18,14 +18,14 @@
 自分のランニングを記録したり他のランナーのランニングコースを知りたいときなどに活用できます。
 
 ## 設計書
-
+https://drive.google.com/drive/folders/1Kc0Ym8026m7NETsE_VoTP2kjM_f4_Sxr
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1XLWzJiATNIfnLEuKk9kb81BbaqKKDta8951GlhJyDwE/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL,Rspec
+- 言語：HTML,CSS,JavaScript,Ruby,MySQL,Rspec
 - フレームワーク：Ruby on Rails,Bootstrap
 - JSライブラリ：jQuery
 - IDE：Cloud9
